@@ -1,3 +1,22 @@
 <section id="home-container">  
-  <h1 class="main-title">BlocItOff</h1>
+  <div class="container col-md-8">
+    <h1 class="main-title">BlocItOff</h1>
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label class="sr-only">Task</label>
+        <input type="text" placeholder="new task" ng-model="curTask">
+        <button type="submit" class="btn btn-primary" ng-click="addTask($event)">Add Task</button>
+      </div>
+    </form>
+    <h3 class="sub-title">Task List</h3>
+    <table class="table table-striped">
+      <th class-"col-md-1">#</th>
+      <th>Task</th>
+      <tr ng-repeat="task in taskList">
+        <td>{{ $index + 1 }}</td>
+        <td>{{ task }}</td>
+      </tr>
+    </table>
+  </div>
+
 </section>
