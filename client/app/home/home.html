@@ -5,7 +5,7 @@
           <div class="form-group">
             <label class="sr-only">Task</label>
             <input type="text-area" placeholder="new task" ng-model="description">
-            <button type="submit" class="btn btn-success" ng-click="addTask()">Add Open Task</button>
+            <button type="submit" class="btn btn-success" ng-click="addTask()">Add New Task</button>
           </div>
         </form>
     <tabset>
@@ -19,16 +19,16 @@
             <th>Task</th>
           </tr>
           <tr ng-repeat="task in taskList | filter:{ name: 'open' }">
-            <td><span class="mark-it"><i class="fa fa-square-o" ng-click="removeTask($index)"></i>
-                <i class="fa fa-check-square-o" ng-click="toggleOpenClosed($index)"></i></span>
+            <td><span class="mark-it"><i class="fa fa-square-o" ng-click="toggleOpenClosed(task)"></i>
+                <i class="fa fa-check-square-o" ng-click="toggleOpenClosed(task)"></i></span>
             </td>
             <td>{{ $index + 1 }}</td>
             <td>{{ task.description }}</td> 
           </tr>
         </table>
       </tab>
-      <tab class="task-tab" heading="Completed Tasks">
-        <h4 id="closed-hdr">All Tasks</h3>
+      <tab class="task-tab" heading="Completed/Expired Tasks">
+        <h4 id="closed-hdr">Completed/Expired Tasks</h3>
         <table class="table table-striped">
           <tr>
             <th class="done-col">Re-Open</th>
@@ -36,9 +36,9 @@
             <th>Task</th>
             <th>Status</th>
           </tr>
-          <tr ng-repeat="task in taskList | filter:{ name: closed }">
-            <td><span class="mark-it"><i class="fa fa-square-o" ng-click="removeTask($index)"></i>
-                <i class="fa fa-check-square-o" ng-click="toggleOpenClosed($index)"></i></span>
+          <tr ng-repeat="task in taskList | filter:{ name: 'closed' }">
+            <td><span class="mark-it"><i class="fa fa-square-o" ng-click="toggleOpenClosed(task)"></i>
+                <i class="fa fa-check-square-o" ng-click="toggleOpenClosed(task)"></i></span>
             </td>
             <td>{{ $index + 1 }}</td>
             <td>{{ task.description }}</td> 

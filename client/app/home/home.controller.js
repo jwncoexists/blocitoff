@@ -40,47 +40,49 @@ app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
   } // addTask
 
   // Update task in the database
-  $scope.updateTask = function(index, value) {
-    if (index >= 0) {
-      $http.post('/api/tasks/' + $scope.taskList[index]._id, $scope.taskList[index]).then(
+  $scope.updateTask = function(task) {
+    if (task) {
+      $http.put('/api/tasks/' + task._id, task).then(
           function(response) {
             // $scope.taskList.splice(index,1);
             $scope.fetchTasks();
           }, 
           function(errResponse) {
-            console.error("Error while updating task: " + $scope.taskList[index]._id + $scope.taskList[index].description);
+            console.error("Error while updating task: " + task._id + task.description);
           }
       );// $http.delete.then
     } // if
   }; // updateTask
 
+
   // set name="open" if closed, and "closed" if open
-  $scope.toggleOpenClosed = function(index) {
-    if ($scope.taskList[index].name == "open") {
-      $scope.taskList[index].name = "closed";
-      $scope.updateTask(index, "closed");
+  $scope.toggleOpenClosed = function(task) {
+    if (task.name == "open") {
+      task.name = "closed";
+      $scope.updateTask(task);
     } 
     else {
-      $scope.taskList[index].name = "open";
-      $scope.updateTask(index, "open");
+      task.name = "open";
+      $scope.updateTask(task);
     }
     
   }; // removeTask
 
   // Remove task from the database
-  $scope.removeTask = function(index) {
-    if (index >= 0) {
-      $http.delete('/api/tasks/' + $scope.taskList[index]._id).then(
+  $scope.removeTask = function(task) {
+    if (task._id) {
+      $http.delete('/api/tasks/' + task._id).then(
           function(response) {
             // $scope.taskList.splice(index,1);
             $scope.fetchTasks();
           }, 
           function(errResponse) {
-            console.error("Error while deleting task: " + $scope.taskList[index]._id);
+            console.error("Error while deleting task: " + task._id);
           }
       );// $http.delete.then
     } // if
   }; // removeTask
 
   $scope.fetchTasks();
-}]);
+}]); // HomeCtrl controller
+
