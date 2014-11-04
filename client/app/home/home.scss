@@ -2,22 +2,65 @@
   text-align: center;
 }
 
-.sub-title {
-  text-align: left;
+.done-col {
+  width: 80px;
+}
+
+.task-number-col {
+  width: 20px;
 }
 
 form {
-  align: center;
-  margin: 0 auto; 
+  align: left;
   width: 480px;
   padding-top: 20px;
+  padding-left: 20px;
 }
 
 input {
-  width: 400px;
+  width: 480px;
   height: 30px;
+  margin-bottom: 20px;
 }
 
 button {
   height: 30px;
+  align: center;
+  padding: 20px;
+  background-color: green;
 }
+
+.mark-it:hover .fa-square-o,
+.mark-it .fa-check-square-o {
+  display: none;
+}
+.mark-it:hover .fa-check-square-o {
+  display: inline;
+  color: red;
+  cursor: pointer;
+}
+
+.task-tab {
+  margin-top: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+h4 {
+  color: #54B061;
+  margin-top: 20px;
+}
+
+#open-hdr {
+  text-align: left;
+  color: #54B061;
+  margin-top: 20px;
+}
+
+#closed-hdr {
+  text-align: left;
+  color: blue;
+  margin-top: 20px;
+}
+
