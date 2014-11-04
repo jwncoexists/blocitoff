@@ -4,7 +4,7 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
   $scope.taskList = [];
   $scope.name = null;
   $scope.description = null;
-  $scope.expireTime = 20000; // window to expire tasks in milliseconds
+  $scope.expireTime = 60000; // window to expire tasks in milliseconds
 
   // Retrieve list of tasks from the database
   $scope.fetchTasks = function() {
