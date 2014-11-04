@@ -36,6 +36,17 @@ button {
 }
 .mark-it:hover .fa-check-square-o {
   display: inline;
+  color: blue;
+  cursor: pointer;
+}
+
+
+.delete-it:hover .fa-times-circle-o,
+.delete-it .fa-times-circle {
+  display: none;
+}
+.delete-it:hover .fa-times-circle {
+  display: inline;
   color: red;
   cursor: pointer;
 }

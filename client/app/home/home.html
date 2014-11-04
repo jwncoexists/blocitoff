@@ -14,11 +14,15 @@
         <h4 id="open-hdr">Open Task List</h3>
         <table class="table table-striped">
           <tr>
+          	<th class="done-col">Delete</th>
             <th class="done-col">Complete</th>
             <th class="task-number-col">#</th>
             <th>Task</th>
           </tr>
           <tr ng-repeat="task in taskList | filter:{ name: 'open' }">
+          	<td><span class="delete-it"><i class="fa fa-times-circle-o" ng-click="removeTask(task)"></i>
+                <i class="fa fa-times-circle" ng-click="removeTask(task)"></i></span>
+            </td>
             <td><span class="mark-it"><i class="fa fa-square-o" ng-click="toggleOpenClosed(task)"></i>
                 <i class="fa fa-check-square-o" ng-click="toggleOpenClosed(task)"></i></span>
             </td>
@@ -31,12 +35,16 @@
         <h4 id="closed-hdr">Completed/Expired Tasks</h3>
         <table class="table table-striped">
           <tr>
+            <th class="done-col">Delete</th>
             <th class="done-col">Re-Open</th>
             <th class="task-number-col">#</th>
             <th>Task</th>
             <th>Status</th>
           </tr>
-          <tr ng-repeat="task in taskList | filter:{ name: 'closed' }">
+          <tr ng-repeat="task in taskList | filter: showDoneTasks">
+          	<td><span class="delete-it"><i class="fa fa-times-circle-o" ng-click="removeTask(task)"></i>
+                <i class="fa fa-times-circle" ng-click="removeTask(task)"></i></span>
+            </td>
             <td><span class="mark-it"><i class="fa fa-square-o" ng-click="toggleOpenClosed(task)"></i>
                 <i class="fa fa-check-square-o" ng-click="toggleOpenClosed(task)"></i></span>
             </td>

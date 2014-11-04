@@ -1,10 +1,10 @@
 app = angular.module('blocitoffApp');
 
-app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
   $scope.taskList = [];
   $scope.name = null;
   $scope.description = null;
-  $scope.expiration = 60; // window to expire tasks in seconds
+  $scope.expireTime = 20000; // window to expire tasks in milliseconds
 
   // Retrieve list of tasks from the database
   $scope.fetchTasks = function() {
@@ -83,6 +83,38 @@ app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
     } // if
   }; // removeTask
 
+  $scope.expireTasks = function() {
+    var timediff = 0;
+    var d1 = new Date();
+    var d2;
+    
+    for (var i = 0; i < $scope.taskList.length; i++) {
+      if ($scope.taskList[i].name == "open") {
+        //console.log($scope.taskList[i]);
+        d2 = new Date($scope.taskList[i].created_at);
+        timediff = d1 - d2;
+        console.log(timediff);
+      
+        if (timediff >= $scope.expireTime) {
+          $scope.taskList[i].name="expired";
+          $scope.updateTask($scope.taskList[i]);
+        }
+      } 
+    } //for
+  }; // expireTasks
+
+  $scope.showDoneTasks = function(task){
+    return task.name == "closed" || 
+           task.name == "expired";
+  };
+
+  
+  $interval(function(){
+     console.log('ping');
+     $scope.expireTasks()
+   }, 3000);
+
   $scope.fetchTasks();
+
 }]); // HomeCtrl controller
 
