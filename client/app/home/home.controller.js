@@ -4,15 +4,17 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
   $scope.taskList = [];
   $scope.name = null;
   $scope.description = null;
-  $scope.expireTime = 60000; // window to expire tasks in milliseconds
+  $scope.expireTime = 60000; // window to expire tasks, in milliseconds
+
+  $scope.timeRemaining = function(task) {
+    return ($scope.expireTime - (moment() - moment(task.created_at)))/1000;
+  }
 
   // Retrieve list of tasks from the database
   $scope.fetchTasks = function() {
     $http.get('/api/tasks').then(
       function(response) {
         $scope.taskList = response.data;
-        console.log('finished retrieving tasks:');
-        console.log($scope.taskList)
       }, 
       function(errResponse) {
         console.error("Error while fetching task list");
@@ -117,4 +119,41 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
   $scope.fetchTasks();
 
 }]); // HomeCtrl controller
+
+// ***************** SERVICES **********************
+
+
+// ***************** FILTERS **********************
+
+app.filter('timecode', function(){
+   return function(seconds) {
+     seconds = Number.parseFloat(seconds);
+ 
+     // Returned when no time is provided.
+     if (Number.isNaN(seconds)) {
+       return '-:--';
+     }
+ 
+     // make it a whole number
+     var wholeSeconds = Math.floor(seconds); 
+     var minutes = Math.floor(wholeSeconds / 60);
+ 
+     remainingSeconds = wholeSeconds % 60;
+ 
+     var output = minutes + ':';
+ 
+     // zero pad seconds, so 9 seconds should be :09
+     if (remainingSeconds < 10) {
+       output += '0';
+     }
+ 
+     output += remainingSeconds;
+ 
+     return output;
+   }
+ }) //timecode filter
+
+
+
+
 
