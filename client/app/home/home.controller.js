@@ -85,19 +85,13 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
     } // if
   }; // removeTask
 
-  $scope.expireTasks = function() {
-    var timediff = 0;
-    var d1 = new Date();
-    var d2;
-    
+  // go through task list and mark tasks past the time limit as expired
+  $scope.expireTasks = function() {   
     for (var i = 0; i < $scope.taskList.length; i++) {
       if ($scope.taskList[i].name == "open") {
         //console.log($scope.taskList[i]);
-        d2 = new Date($scope.taskList[i].created_at);
-        timediff = d1 - d2;
-        console.log(timediff);
       
-        if (timediff >= $scope.expireTime) {
+        if ($scope.timeRemaining($scope.taskList[i]) <= 0) {
           $scope.taskList[i].name="expired";
           $scope.updateTask($scope.taskList[i]);
         }
@@ -127,28 +121,40 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
 
 app.filter('timecode', function(){
    return function(seconds) {
+
      seconds = Number.parseFloat(seconds);
- 
      // Returned when no time is provided.
      if (Number.isNaN(seconds)) {
-       return '-:--';
+       return '0d --:--:--';
      }
  
      // make it a whole number
      var wholeSeconds = Math.floor(seconds); 
-     var minutes = Math.floor(wholeSeconds / 60);
+     var numDays = Math.floor(wholeSeconds / 86400);
+     var numHours = Math.floor((wholeSeconds % 86400) / 3600);
+     var numMinutes = Math.floor(((wholeSeconds % 86400) % 3600) / 60);
+     var numSeconds = ((wholeSeconds % 86400) % 3600) % 60;
+
+     var output = numDays + "d ";
+
+     // zero pad hours, so 9 hours is 09
+     if (numHours < 10) {
+          output += '0';
+     }
+     output += numHours + ':';
+
+     // output minutes
+     if (numMinutes < 10) {
+          output += '0';
+     }
+     output += numMinutes + ':';
  
-     remainingSeconds = wholeSeconds % 60;
- 
-     var output = minutes + ':';
- 
-     // zero pad seconds, so 9 seconds should be :09
-     if (remainingSeconds < 10) {
+     // output seconds
+     if (numSeconds < 10) {
        output += '0';
      }
- 
-     output += remainingSeconds;
- 
+     output += numSeconds;
+
      return output;
    }
  }) //timecode filter
