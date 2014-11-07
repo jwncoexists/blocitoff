@@ -6,8 +6,9 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
   $scope.name = null;
   $scope.description = null;
   
-  if (!$scope.expireTime) {
-    $scope.expireTime = 60000; // set default window to expire tasks, in milliseconds
+  $scope.test = {};
+  if (!$scope.test.expireTime) {
+    $scope.test.expireTime= 60000; // set default window to expire tasks, in milliseconds
   }
 
   // Retrieve list of tasks from the database
@@ -92,17 +93,11 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
 
   // return amount of time remaining until task expires
   $scope.timeRemaining = function(task) {
-    return ($scope.expireTime - (moment() - moment(task.created_at)))/1000;
+    return ($scope.test.expireTime- (moment() - moment(task.created_at)))/1000;
   }  
 
   // go through task list and mark tasks past the time limit as expired
   $scope.expireTasks = function() {   
-    console.log($scope.expireTime);
-    /* $scope.$watch( "expireTime", 
-                   function() {
-                      $interval.cancel(timerInterval);
-                      launchInterval();
-    }); */
     for (var i = 0; i < $scope.taskList.length; i++) {
       if ($scope.taskList[i].name == "open") {
         if ($scope.timeRemaining($scope.taskList[i]) <= 0) {
@@ -118,11 +113,10 @@ app.controller('HomeCtrl', ['$scope', '$http', '$interval', function($scope, $ht
   console.log('launching interval');
   timerInterval = $interval(function(){
      $scope.expireTasks()
-   }, 3000);
+   }, 1000);
  };
 
   launchInterval();
-
   $scope.fetchTasks();
 
 }]); // HomeCtrl controller

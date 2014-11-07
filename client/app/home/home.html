@@ -19,7 +19,6 @@
             <th class="task-number-col">#</th>
             <th>Task</th>
             <th>Expires In</th>
-            <th>Expiration Window</th>
           </tr>
           <tr ng-repeat="task in taskList | filter:{ name: 'open' }">
           	<td><span class="delete-it"><i class="fa fa-times-circle-o" ng-click="removeTask(task)"></i>
@@ -31,7 +30,6 @@
             <td>{{ $index + 1 }}</td>
             <td>{{ task.description }}</td> 
             <td>{{ timeRemaining(task) | timecode }}</td> 
-            <td>{{ expireTime }} </td>
           </tr>
         </table>
       </tab>
@@ -61,8 +59,7 @@
       <tab class="task-tab" heading="Settings">
           <div class="form-group">
             <label>Task Expiration Time (in ms)</label>
-            <input type="text" placeholder="task expiration time in ms" ng-model="expireTime">
-            {{ expireTime }}
+            <input type="text" placeholder="task expiration time in ms" ng-model="test.expireTime">
           </div>
         </form>
       </tab>
