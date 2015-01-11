@@ -1,8 +1,6 @@
-## Blocitoff Seed Application
+## Blocitoff Application
 
-This application is meant to be a pre-packaged backend for the Blocitoff Frontend Project.
-
-It uses:
+A task list manager application which uses the following technologies:
 
 - Grunt for task management
 - Express for backend
@@ -18,7 +16,7 @@ __Note:__ While everything here should work fine with your computer, there may b
 To get started working with the application, clone the repo into a new directory.
 
 ```bash
-$ git clone https://github.com/Bloc/blocitoff_seed.git blocitoff
+$ git clone https://github.com/jwncoexists/pomodoro.git blocitoff
 ```
 
 Once you've cloned it, make sure to install all the necessary packages. If you're on Windows using Vagrant, don't forget to use the `--no-bin-links` param with `npm install`.
@@ -58,13 +56,11 @@ server/
    ...
 ```
 
-The app is structured differently from Bloc Jams. There are two main directories in the app: `client` and `server`. We recommend staying away from changing anything about the `server` directory unless you have a mentor willing to give you some insight into what's going on with it. It provides the backend logic for our application and could break the app if tampered with.
-
-We'll be keeping all of our development in `client`. Within client there are several subdirectories that are important for doing the Frontend of the app.
+There are two main directories in the app: `client` and `server`. The  `client` directory is for the front-end code, and the `server` directory provides the backend logic for our application.
 
 #### Component Organization
 
-The app is organized by feature, not by component type. This means that instead of having a folder for `controllers`, `models`, `styles`, etc., everything that has to do with a single feature or part of the app is grouped into one directory, regardless of language or function of the component.
+The app is organized by feature so everything that has to do with a single feature or part of the app is grouped into one directory, regardless of language or function of the component.
 
 For example, in the `home` directory we have everything related to the homepage (even though very little of it is populated). Styling, controller logic and markup is all in the same folder.
 
@@ -104,7 +100,3 @@ The base route for making HTTP request is `/api/tasks`. The app supports the sta
 #### Recommended Angular Services and Directives
 
 Use a service like [`$http`](https://docs.angularjs.org/api/ng/service/$http) to make HTTP requests to the api, and something like `ngSubmit` to create task data. An `ngRepeat` might be good for listing all of your tasks.
-
-### Questions or Repeated Errors?
-
-[Email me](mailto:joe@bloc.io)
