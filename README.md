@@ -1,12 +1,12 @@
 ## Blocitoff Application
 
-A task list manager application which uses the following technologies:
+A task list manager application built with the following technologies:
 
 - Grunt for task management
 - Express for backend
 - Angular and ui-router for its frontend
 - Sass/CSS (whichever is preferred) for styling
-- Plain ol' HTML for markup
+- HTML for markup
 - Mongodb for storing data
 
 __Note:__ While everything here should work fine with your computer, there may be some setup required for MongoDB. Try running the app without doing any separate installation, but if it doesn't work, try the following: If you're running Mac OSX, then you can follow [these instructions](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/) for getting Mongo setup. If you're running a Linux server (like Vagrant or Nitrous), you can make a run at [these instructions](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/), though you're probably best served doing this with your mentors help.
@@ -16,7 +16,7 @@ __Note:__ While everything here should work fine with your computer, there may b
 To get started working with the application, clone the repo into a new directory.
 
 ```bash
-$ git clone https://github.com/jwncoexists/pomodoro.git blocitoff
+$ git clone https://github.com/jwncoexists/blocitoff.git blocitoff
 ```
 
 Once you've cloned it, make sure to install all the necessary packages. If you're on Windows using Vagrant, don't forget to use the `--no-bin-links` param with `npm install`.
