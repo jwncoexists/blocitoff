@@ -1,4 +1,4 @@
-## Blocitoff Application
+## Blocitoff Task Management Application
 
 A task list manager application built with the following technologies:
 
@@ -66,16 +66,17 @@ For example, in the `home` directory we have everything related to the homepage 
 
 The `assets` folder should only be used for static assets like images and fonts. Scripts and styling will be put into component folders in this app structure.
 
-#### Global Logic
-
-Put anything that is relevant to the entirety of your Angular app in the `app.js` and `app.scss` files. This includes module importation and state definitions. Open the files and get a sense for what kind of stuff might be included.
 
 
 ### Running the App
 
 The app uses [Grunt](http://gruntjs.com/) for running tasks, including running the server in development mode. To get started running the app locally, just run:
 
-```bash
+```bash session #1
+$ mongod
+```
+
+```bash session #2
 $ grunt serve -d
 ```
 
@@ -97,6 +98,6 @@ The base route for making HTTP request is `/api/tasks`. The app supports the sta
 - `PUT` to `/api/things` to update a specific task
 - `DELETE` to `/api/things/:id` to delete a task
 
-#### Recommended Angular Services and Directives
+## Screenshot
 
-Use a service like [`$http`](https://docs.angularjs.org/api/ng/service/$http) to make HTTP requests to the api, and something like `ngSubmit` to create task data. An `ngRepeat` might be good for listing all of your tasks.
+![blocitoff](/doc/screenshot-blocitoff-1.png)
